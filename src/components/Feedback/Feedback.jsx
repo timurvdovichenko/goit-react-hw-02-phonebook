@@ -18,8 +18,9 @@ const Feedback = ({
       <Section title="Please leave feedback">
         <FeedbackOptions options={stateObject} onLeaveFeedback={onClickChange} />
       </Section>
-      {total > 0 ? (
-        <Section title="Statistics">
+
+      <Section title="Statistics">
+        {total > 0 ? (
           <Statistics
             good={good}
             neutral={neutral}
@@ -27,10 +28,10 @@ const Feedback = ({
             total={total}
             positivePercentage={percentagePositive}
           />
-        </Section>
-      ) : (
-        <Notification message="There is no feedback" />
-      )}
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
+      </Section>
     </div>
   );
 };

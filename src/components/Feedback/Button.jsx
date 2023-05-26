@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
+import { ButtonStyled, ListItemStyled } from './Feedback.styled';
 const Button = ({ name, onLeaveFeedback }) => {
   return (
-    <li>
-      <button type="button" name={name} onClick={onLeaveFeedback}>
+    <ListItemStyled>
+      <ButtonStyled type="button" name={name} onClick={onLeaveFeedback}>
         {name}
-      </button>
-    </li>
+      </ButtonStyled>
+    </ListItemStyled>
   );
 };
 

@@ -1,7 +1,11 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
-import Feedback from './Feedback/Feedback';
+// import Feedback from './Feedback/Feedback';
 import Notification from './Feedback/Notification';
+import Section from './Feedback/Section';
+import FeedbackOptions from './Feedback/FeedbackOptions';
+import Statistics from './Feedback/Statistics';
+import PhoneBook from './PhoneBook/Phonebook';
 
 class App extends Component {
   static defaultProps = {
@@ -14,6 +18,8 @@ class App extends Component {
     good: this.props.goodInitialValue,
     neutral: this.props.neutralInitialValue,
     bad: this.props.badInitialValue,
+    contacts: [],
+    name: '',
   };
   onClickChange = e => {
     const { name } = e.target;
@@ -36,7 +42,7 @@ class App extends Component {
     const totalFeedback = this.countTotalFeedback();
     return (
       <div>
-        <Feedback
+        {/* <Feedback
           good={this.state.good}
           neutral={this.state.neutral}
           bad={this.state.bad}
@@ -44,7 +50,26 @@ class App extends Component {
           total={totalFeedback}
           percentagePositive={checkedCountPercentage}
           stateObject={stateObject}
-        />
+        /> */}
+        <Section title="Please leave feedback">
+          <FeedbackOptions options={stateObject} onLeaveFeedback={this.onClickChange} />
+        </Section>
+
+        <Section title="Statistics">
+          {totalFeedback > 0 ? (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={totalFeedback}
+              positivePercentage={checkedCountPercentage}
+            />
+          ) : (
+            <Notification message="There is no feedback" />
+          )}
+        </Section>
+
+        <PhoneBook />
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
+import { PararagraphStyled } from './Feedback.styled';
 const Notification = ({ message }) => {
-  return <p>{message}</p>;
+  return <PararagraphStyled>{message}</PararagraphStyled>;
 };
 
 export default Notification;

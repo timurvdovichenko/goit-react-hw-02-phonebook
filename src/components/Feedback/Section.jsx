@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import { H2Styled } from './Feedback.styled';
 const Section = ({ title, children }) => {
   return (
     <section>
-      <p>{title}</p>
+      <H2Styled>{title}</H2Styled>
       {children}
     </section>
   );
