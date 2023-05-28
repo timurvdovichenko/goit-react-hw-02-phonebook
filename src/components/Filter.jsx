@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Input, Form, Label } from './Phonebook.styled';
+import { Form, Label, Input } from './Common.styled';
 
 const Filter = ({ value, onChange }) => {
   return (
@@ -12,7 +12,7 @@ const Filter = ({ value, onChange }) => {
           value={value}
           onChange={onChange}
           inputFilter={'margin: 0; margin-top: 10px;'}
-        ></Input>
+        />
       </Label>
     </Form>
   );

@@ -1,5 +1,8 @@
 import { Component } from 'react';
-import PhoneBook from './PhoneBook/Phonebook';
+import ContactList from './ContactList';
+import ContactForm from './ContactForm';
+import { H2Styled } from './App.styled';
+import Filter from './Filter';
 
 class App extends Component {
   state = {
@@ -13,6 +16,16 @@ class App extends Component {
   };
 
   formSubmitHandler = data => {
+    const { contacts } = this.state;
+    const isExist = contacts.find(
+      contact => contact.name.toLowerCase() === data.name.toLowerCase(),
+    );
+
+    if (isExist) {
+      alert(`${data.name} is already in contacts.`);
+      return;
+    }
+
     this.setState(prevState => {
       return { contacts: [...prevState.contacts, data] };
     });
@@ -20,13 +33,19 @@ class App extends Component {
   filterHandlerData = e => {
     this.setState({ filter: e.currentTarget.value });
   };
-  onDeleteContactHandler = data => {
-    const idToDelete = data.currentTarget.id;
+  onDeleteContactHandler = id => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(contact => {
-        return contact.id !== idToDelete;
+        return contact.id !== id;
       }),
     }));
+  };
+
+  getFilteredContacts = () => {
+    const { filter, contacts } = this.state;
+    return contacts.filter(contact => {
+      return contact.name.toLowerCase().includes(filter.toLowerCase());
+    });
   };
 
   getNormalizedContacts = () => {
@@ -34,26 +53,18 @@ class App extends Component {
       return { id: contact.id, name: contact.name.toLowerCase(), number: contact.number };
     });
   };
-  getFilteredContacts = data => {
-    const { filter } = this.state;
-    return data.filter(contact => {
-      return contact.name.includes(filter.toLowerCase());
-    });
-  };
 
   render() {
-    const normalizedContacts = this.getNormalizedContacts();
-    const filteredContacts = this.getFilteredContacts(normalizedContacts);
+    const filteredContacts = this.getFilteredContacts();
 
     return (
       <div>
-        <PhoneBook
-          onSubmitForm={this.formSubmitHandler}
-          contacts={filteredContacts}
-          filter={this.state.filter}
-          filterHandlerData={this.filterHandlerData}
-          onClickDelete={this.onDeleteContactHandler}
-        />
+        <H2Styled>PhoneBook</H2Styled>
+        <ContactForm onSubmitForm={this.formSubmitHandler} />
+        <H2Styled>Contacts</H2Styled>
+        <Filter value={this.state.filter} onChange={this.filterHandlerData} />
+        {/* <ContactList contacts={filteredContacts} onClick={this.onDeleteContactHandler} /> */}
+        <ContactList contacts={filteredContacts} onClick={this.onDeleteContactHandler} />
       </div>
     );
   }

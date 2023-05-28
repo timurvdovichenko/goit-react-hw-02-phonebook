@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const H2Styled = styled.h2`
-  display: block;
-  margin: 30px;
-  font-size: 24px;
-`;
 export const Form = styled.form`
   display: block;
   margin: 30px;
@@ -22,10 +17,6 @@ export const Input = styled.input`
   width: 150px;
   ${props => props.inputFilter}
 `;
-export const Span = styled.span`
-  margin-bottom: 10px;
-`;
-
 export const Button = styled.button`
   background: transparent;
   border-radius: 3px;
@@ -40,21 +31,4 @@ export const Button = styled.button`
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
     scale: 1.01;
   }
-`;
-
-export const List = styled.ul`
-  display: flex;
-  flex-direction: column;
-  margin: 30px;
-  padding: 15px;
-  margin-top: 0;
-  width: 300px;
-`;
-
-export const ListItem = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-transform: capitalize;
-  padding: 3px;
 `;
