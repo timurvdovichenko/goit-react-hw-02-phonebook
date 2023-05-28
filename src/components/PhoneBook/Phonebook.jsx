@@ -22,7 +22,7 @@ class PhoneBook extends Component {
     const { name, number } = this.state;
     const contact = { name: name, id: nanoid(), number: number };
     const normalizedName = this.state.name.toLowerCase();
-    const checkedName = this.props.contacts.find(contact => contact.name === normalizedName);
+    const checkedName = this.checkCurrentContact(normalizedName);
 
     if (checkedName) {
       alert(`${name} is already in contacts`);
@@ -36,8 +36,8 @@ class PhoneBook extends Component {
     this.setState({ name: '', number: '' });
   };
 
-  checkCurrentContact = () => {
-    this.props.contacts.find(contact => contact.name === contact);
+  checkCurrentContact = data => {
+    return this.props.contacts.find(contact => contact.name === data);
   };
 
   render() {
